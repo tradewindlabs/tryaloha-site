@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Try Aloha — AI Voice Agents for Hawaii Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0B4F6C;
+    --deep: #062A3A;
+    --sand: #F5F0E8;
+    --coral: #E8663C;
+    --foam: #FFFFFF;
+    --palm: #2D8A6E;
+    --sky: #7EC8D9;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--sand);
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* NAV */
+  nav {
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ocean);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--coral); }
+
+  .nav-cta {
+    background: var(--coral);
+    color: var(--foam);
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--coral);
+  }
+
+  .nav-cta:hover {
+    background: transparent;
+    color: var(--coral);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--ocean);
+    color: var(--sky);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: fadeDown 0.8s ease;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--deep);
+    max-width: 780px;
+    margin: 0 auto 24px;
+    animation: fadeDown 0.8s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    animation: fadeDown 0.8s ease 0.2s both;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--coral);
+    color: var(--foam);
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    animation: fadeDown 0.8s ease 0.3s both;
+    border: 2px solid var(--coral);
+  }
+
+  .hero-cta:hover {
+    background: var(--deep);
+    border-color: var(--deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(11, 79, 108, 0.2);
+  }
+
+  .hero-cta svg { width: 20px; height: 20px; }
+
+  .hero-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    animation: fadeDown 0.8s ease 0.4s both;
+  }
+
+  /* WAVE DIVIDER */
+  .wave-divider {
+    height: 80px;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave-divider::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    right: -5%;
+    height: 80px;
+    background: var(--foam);
+    border-radius: 50% 50% 0 0;
+  }
+
+  /* PROBLEM */
+  .problem {
+    background: var(--foam);
+    padding: 60px 0 80px;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .problem h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--deep);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .problem p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--coral);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .phone-mockup {
+    background: var(--deep);
+    border-radius: 24px;
+    padding: 32px 24px;
+    color: var(--foam);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(6, 42, 58, 0.25);
+  }
+
+  .phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 70% 30%, rgba(126, 200, 217, 0.08) 0%, transparent 50%);
+  }
+
+  .chat-line {
+    padding: 12px 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    position: relative;
+    animation: chatIn 0.5s ease both;
+  }
+
+  .chat-line.ai {
+    background: rgba(126, 200, 217, 0.15);
+    margin-right: 40px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .chat-line.caller {
+    background: rgba(232, 102, 60, 0.2);
+    margin-left: 40px;
+    border-bottom-right-radius: 4px;
+    text-align: right;
+  }
+
+  .chat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 4px;
+  }
+
+  .chat-line:nth-child(2) { animation-delay: 0.1s; }
+  .chat-line:nth-child(3) { animation-delay: 0.2s; }
+  .chat-line:nth-child(4) { animation-delay: 0.3s; }
+  .chat-line:nth-child(5) { animation-delay: 0.4s; }
+  .chat-line:nth-child(6) { animation-delay: 0.5s; }
+
+  /* HOW IT WORKS */
+  .how {
+    background: var(--foam);
+    padding: 0 0 80px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--palm);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--deep);
+    margin-bottom: 60px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .step {
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .step:hover {
+    background: var(--sand);
+    transform: translateY(-4px);
+  }
+
+  .step-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.8rem;
+  }
+
+  .step:nth-child(1) .step-icon { background: rgba(11, 79, 108, 0.1); }
+  .step:nth-child(2) .step-icon { background: rgba(232, 102, 60, 0.1); }
+  .step:nth-child(3) .step-icon { background: rgba(45, 138, 110, 0.1); }
+
+  .step h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--deep);
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* NICHES */
+  .niches {
+    background: var(--deep);
+    padding: 80px 0;
+    color: var(--foam);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .niches::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(126, 200, 217, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(232, 102, 60, 0.04) 0%, transparent 60%);
+  }
+
+  .niches .section-label { color: var(--sky); }
+  .niches .section-title { color: var(--foam); }
+
+  .niche-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+
+  .niche-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .niche-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+    border-color: var(--coral);
+  }
+
+  .niche-emoji {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .niche-card h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .niche-card p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.4;
+  }
+
+  /* PRICING */
+  .pricing {
+    background: var(--foam);
+    padding: 80px 0;
+  }
+
+  .pricing-card {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--sand);
+    border-radius: 24px;
+    padding: 48px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .pricing-card:hover {
+    border-color: var(--coral);
+    box-shadow: 0 16px 50px rgba(232, 102, 60, 0.1);
+  }
+
+  .pricing-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1;
+  }
+
+  .pricing-amount span {
+    font-size: 1.2rem;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+  }
+
+  .pricing-desc {
+    margin: 16px 0 28px;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+
+  .pricing-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.95rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--palm);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .pricing-cta {
+    display: inline-block;
+    background: var(--ocean);
+    color: var(--foam);
+    padding: 14px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--ocean);
+  }
+
+  .pricing-cta:hover {
+    background: var(--deep);
+    border-color: var(--deep);
+    transform: translateY(-2px);
+  }
+
+  .pricing-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--sand);
+    padding: 48px 0;
+    text-align: center;
+  }
+
+  footer .logo {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  footer a {
+    color: var(--ocean);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes chatIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: 1fr; gap: 24px; }
+    .niche-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-row { gap: 20px; }
+    .pricing-card { padding: 32px 24px; }
+    .hero { padding: 48px 0 64px; }
+  }
+
+  @media (max-width: 480px) {
+    .niche-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="container">
+  <nav>
+    <a href="#" class="logo">try<span>aloha</span>.ai</a>
+    <a href="/cdn-cgi/l/email-protection#acd8cdd5c0c3deecd8ded5cdc0c3c4cd82cdc5" class="nav-cta">Get Started</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Built in Hawaii, for Hawaii</div>
+    <h1>Your business never<br>misses a call <em>again</em></h1>
+    <p class="hero-sub">AI voice agents that answer your phone 24/7 — book appointments, answer questions, and sound like a real person. Built for Hawaii small businesses.</p>
+    <a href="/cdn-cgi/l/email-protection#e692879f8a8994a692949f878a898e87c8878f" class="hero-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Hear a demo
+    </a>
+    <p class="hero-note">Free setup. Cancel anytime. No contracts.</p>
+  </div>
+</section>
+
+<div class="wave-divider"></div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <h2>You're out on the water. The phone rings. Another lost customer.</h2>
+        <p>Every missed call is a missed booking. Tourists searching for surf lessons, visitors looking for a tour, guests with questions about their rental — they're not leaving voicemails. They're calling the next business on Google.</p>
+        <p>Your AI agent picks up every call, answers their questions, and books the appointment. While you focus on what you actually do.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">62%</div>
+            <div class="stat-label">of callers won't<br>leave a voicemail</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">your AI agent<br>never sleeps</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">&lt;1s</div>
+            <div class="stat-label">answer time,<br>every call</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-mockup">
+        <div class="chat-line ai">
+          <div class="chat-label">AI Agent</div>
+          Aloha! Thanks for calling Koa's Surf School. How can I help you today?
+        </div>
+        <div class="chat-line caller">
+          <div class="chat-label">Caller</div>
+          Hey, do you have any group lessons available this Saturday?
+        </div>
+        <div class="chat-line ai">
+          <div class="chat-label">AI Agent</div>
+          We do! We have group lessons at 8 AM and 10 AM, $90 per person for two hours. How many people in your group?
+        </div>
+        <div class="chat-line caller">
+          <div class="chat-label">Caller</div>
+          Four of us. We've never surfed before.
+        </div>
+        <div class="chat-line ai">
+          <div class="chat-label">AI Agent</div>
+          Perfect — beginners are our specialty. I'll put you down for the 8 AM group on Saturday. Can I grab your name and number to confirm?
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Live in 48 hours. Seriously.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">📞</div>
+        <h3>We set up your agent</h3>
+        <p>Tell us about your business — services, hours, pricing, FAQs. We build a custom AI voice agent trained on your business in a day.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">🤙</div>
+        <h3>You get a local 808 number</h3>
+        <p>Your agent gets a dedicated Hawaii phone number. Forward your existing line, or use it as a new one. Your choice.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">🌊</div>
+        <h3>Go do your thing</h3>
+        <p>Your agent answers every call, books appointments, answers questions, and texts you a summary. You focus on your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NICHES -->
+<section class="niches">
+  <div class="container">
+    <div class="section-label">Built for</div>
+    <h2 class="section-title">Hawaii businesses that can't be tied to a phone</h2>
+    <div class="niche-grid">
+      <div class="niche-card">
+        <span class="niche-emoji">🏄</span>
+        <h4>Surf Schools</h4>
+        <p>Book lessons while you're on the water</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🚤</span>
+        <h4>Tour Operators</h4>
+        <p>Answer calls while you're guiding tours</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🏠</span>
+        <h4>Vacation Rentals</h4>
+        <p>Handle guest questions at any hour</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🍽️</span>
+        <h4>Restaurants</h4>
+        <p>Take reservations during the rush</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🔧</span>
+        <h4>Trades & Repair</h4>
+        <p>Catch calls from the job site</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🧘</span>
+        <h4>Fitness & Wellness</h4>
+        <p>Book classes while you're teaching</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🏢</span>
+        <h4>Property Managers</h4>
+        <p>Tenant calls handled 24/7</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-emoji">🚗</span>
+        <h4>Auto Shops</h4>
+        <p>Schedule appointments hands-free</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="container">
+    <div class="section-label">Simple pricing</div>
+    <h2 class="section-title">Less than a part-time receptionist</h2>
+    <div class="pricing-card">
+      <div class="pricing-amount">$500 <span>/month</span></div>
+      <p class="pricing-desc">Everything you need. No hidden fees.</p>
+      <ul class="pricing-features">
+        <li>Dedicated local 808 phone number</li>
+        <li>AI agent trained on your business</li>
+        <li>Answers calls 24/7, 365 days a year</li>
+        <li>Books appointments and answers FAQs</li>
+        <li>SMS confirmations to customers</li>
+        <li>Call transcripts and recordings</li>
+        <li>Monthly performance report</li>
+        <li>Prompt updates anytime — just ask</li>
+      </ul>
+      <a href="/cdn-cgi/l/email-protection#4337223a2f2c310337313a222f2c2b226d222a" class="pricing-cta">Start free — pay when you're happy</a>
+      <p class="pricing-note">Free setup. Free trial. Cancel anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <a href="#" class="logo">try<span>aloha</span>.ai</a>
+    <p>AI voice agents for Hawaii small business</p>
+    <p>Built by <a href="https://tradewindlabs.com">Tradewind Labs LLC</a></p>
+    <p st
