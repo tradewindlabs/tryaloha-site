@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Try Aloha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0B4F6C;
+    --deep: #062A3A;
+    --sand: #F5F0E8;
+    --coral: #E8663C;
+    --foam: #FFFFFF;
+    --palm: #2D8A6E;
+    --sky: #7EC8D9;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--sand);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .top-bar {
+    padding: 24px 0 0;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--coral);
+  }
+
+  .doc {
+    background: var(--foam);
+    border-radius: 24px;
+    padding: 56px 56px 64px;
+    margin: 32px 0 64px;
+    box-shadow: 0 8px 30px rgba(6, 42, 58, 0.06);
+  }
+
+  .doc-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--palm);
+    margin-bottom: 12px;
+  }
+
+  .doc h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    line-height: 1.15;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+
+  .doc .effective {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .doc .lede {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .doc h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--ocean);
+    margin: 28px 0 10px;
+  }
+
+  .doc p {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .doc a {
+    color: var(--coral);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232, 102, 60, 0.3);
+    transition: border-color 0.2s ease;
+  }
+
+  .doc a:hover {
+    border-bottom-color: var(--coral);
+  }
+
+  footer {
+    background: var(--sand);
+    padding: 32px 0 48px;
+    text-align: center;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ocean);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .logo span { color: var(--coral); }
+
+  footer p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  footer a {
+    color: var(--ocean);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .doc { padding: 36px 28px 44px; border-radius: 18px; }
+    .doc h1 { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="top-bar">
+    <a href="/" class="back-link">← back to tryaloha.ai</a>
+  </div>
+
+  <article class="doc">
+    <div class="doc-label">Terms of Service</div>
+    <h1>Terms of Service</h1>
+    <p class="effective">Tradewind Labs LLC · Effective April 2026</p>
+
+    <p class="lede">Tradewind Labs LLC operates personal-assistant and customer-care messaging services under the Try Aloha and Sunny brand names. By using these services, you agree to these terms.</p>
+
+    <h2>Messaging</h2>
+    <p>Messages may include account notifications, reminders, and replies to your inbound messages. Message frequency varies by use case (typically 1–10 messages per week).</p>
+
+    <h2>Costs</h2>
+    <p>Standard message and data rates from your carrier may apply. We do not charge end users.</p>
+
+    <h2>Opt-out</h2>
+    <p>Reply STOP to any text to unsubscribe. Reply HELP for assistance.</p>
+
+    <h2>Support</h2>
+    <p>Email <a href="mailto:taylor@tryaloha.ai">taylor@tryaloha.ai</a> for questions.</p>
+
+    <h2>Liability</h2>
+    <p>Service is provided as-is. We are not responsible for delivery failures by carriers. Maximum liability is limited to the fees you've paid us, if any.</p>
+
+    <h2>Changes</h2>
+    <p>We may update these terms by posting a new version here. Continued use after changes means acceptance.</p>
+
+    <h2>Governing law</h2>
+    <p>Hawaii, USA.</p>
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <a href="/" class="logo">try<span>aloha</span>.ai</a>
+    <p>AI voice agents for Hawaii small business</p>
+    <p>Built by <a href="https://tradewindlabs.com">Tradewind Labs LLC</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
