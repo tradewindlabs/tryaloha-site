@@ -222,6 +222,12 @@ label {
   font-weight: 800;
   font-size: .95rem;
 }
+.field-note {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: .82em;
+  white-space: nowrap;
+}
 input, textarea, select {
   width: 100%;
   border: 1px solid rgba(7,50,68,.18);
@@ -306,6 +312,34 @@ button, .button {
   color: #2c9678;
   font-weight: 900;
 }
+
+/* TryAloha form validation */
+.form-errors {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(231,102,63,.35);
+  background: rgba(231,102,63,.12);
+  color: var(--ink);
+  border-radius: 16px;
+  text-align: left;
+  line-height: 1.45;
+}
+.form-errors strong {
+  display: block;
+  margin-bottom: 6px;
+}
+.form-errors ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.form-errors[hidden] {
+  display: none;
+}
+.invalid-field {
+  border-color: var(--orange) !important;
+  box-shadow: 0 0 0 4px rgba(231,102,63,.14);
+}
+
 footer {
   padding: 40px 0 50px;
   text-align: center;
@@ -338,16 +372,18 @@ footer a { color: var(--teal); }
           <h2>Start your free setup</h2>
           <p class="note">This gives us enough to build your first test version. We’ll follow up if we need details.</p>
 
-          <form name="tryaloha-start" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+          <form name="tryaloha-start" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" novalidate>
             <input type="hidden" name="form-name" value="tryaloha-start">
+
+            <div id="form-errors" class="form-errors" hidden aria-live="polite"></div>
             <p style="display:none">
               <label>Don’t fill this out: <input name="bot-field"></label>
             </p>
 
             <div class="form-grid">
               <div class="field">
-                <label for="business-name">Business name</label>
-                <input id="business-name" name="business-name" required>
+                <label for="business-name">Business / service <span class="field-note">(optional)</span></label>
+                <input id="business-name" name="business-name">
               </div>
 
               <div class="field">
@@ -361,8 +397,8 @@ footer a { color: var(--teal); }
               </div>
 
               <div class="field">
-                <label for="phone">Best phone</label>
-                <input id="phone" name="phone" type="tel">
+                <label for="phone">Best phone <span class="field-note">(include area code)</span></label>
+                <input id="phone" name="phone" type="tel" placeholder="808-555-0198">
               </div>
 
               <div class="field">
@@ -457,5 +493,85 @@ footer a { color: var(--teal); }
     <p>Built by Tradewind Labs LLC</p>
   </footer>
 </div>
+
+<!-- TryAloha form validation -->
+<script>
+(function () {
+  const form = document.querySelector('form[name="tryaloha-start"]');
+  const errorBox = document.getElementById("form-errors");
+
+  if (!form || !errorBox) return;
+
+  const get = (name) => form.elements[name];
+  const clean = (value) => (value || "").trim();
+  const digitsOnly = (value) => clean(value).replace(/\D/g, "");
+  const validEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(value));
+
+  const escapeHtml = (text) => text.replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[ch]));
+
+  function clearErrors() {
+    errorBox.hidden = true;
+    errorBox.innerHTML = "";
+    ["your-name", "email", "phone"].forEach((name) => {
+      const field = get(name);
+      if (field) field.classList.remove("invalid-field");
+    });
+  }
+
+  form.addEventListener("input", clearErrors);
+  form.addEventListener("change", clearErrors);
+
+  form.addEventListener("submit", function (event) {
+    clearErrors();
+
+    const errors = [];
+    const invalidFields = [];
+
+    const name = get("your-name");
+    const email = get("email");
+    const phone = get("phone");
+
+    if (!clean(name.value)) {
+      errors.push("Please add your name.");
+      invalidFields.push(name);
+    }
+
+    if (!clean(email.value)) {
+      errors.push("Please add your best email.");
+      invalidFields.push(email);
+    } else if (!validEmail(email.value)) {
+      errors.push("Check your email — it should look like name@example.com.");
+      invalidFields.push(email);
+    }
+
+    if (clean(phone.value) && digitsOnly(phone.value).length < 10) {
+      errors.push("Check your phone number — include area code, like 808-555-0198.");
+      invalidFields.push(phone);
+    }
+
+    if (errors.length) {
+      event.preventDefault();
+
+      invalidFields.forEach((field) => field.classList.add("invalid-field"));
+
+      errorBox.innerHTML =
+        "<strong>Quick fix before sending:</strong><ul>" +
+        errors.map((error) => "<li>" + escapeHtml(error) + "</li>").join("") +
+        "</ul>";
+
+      errorBox.hidden = false;
+      errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      invalidFields[0].focus();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
