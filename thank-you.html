@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<title>Thanks | tryaloha.ai</title>
+
+<style>
+:root {
+  --ink: #073244;
+  --teal: #0b5f78;
+  --orange: #e7663f;
+  --cream: #fbf6ec;
+  --paper: #fffaf2;
+  --muted: #6b6f76;
+  --line: rgba(7,50,68,.14);
+  --soft: rgba(11,95,120,.07);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(231,102,63,.12), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(11,95,120,.10), transparent 30%),
+    var(--cream);
+}
+a { color: inherit; }
+.container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  gap: 18px;
+}
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.04em;
+}
+.logo span { color: var(--orange); }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal);
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 16px 40px rgba(7,50,68,.16);
+}
+.hero {
+  padding: 42px 0 28px;
+  text-align: center;
+}
+.badge {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.62);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  color: var(--teal);
+}
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: .95;
+  letter-spacing: -0.055em;
+  margin: 22px auto 18px;
+  max-width: 900px;
+}
+h1 em { color: var(--orange); font-style: normal; }
+.lede {
+  font-size: clamp(1.08rem, 2vw, 1.35rem);
+  color: var(--muted);
+  max-width: 790px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+}
+.card {
+  background: rgba(255,250,242,.86);
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  padding: clamp(24px, 4vw, 46px);
+  box-shadow: 0 24px 70px rgba(7,50,68,.10);
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: start;
+}
+.panel {
+  background: rgba(255,255,255,.74);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 24px;
+}
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+.note {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.timeline {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+.timeline-step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.68);
+  border-radius: 20px;
+  position: relative;
+}
+.timeline-step:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  left: 28px;
+  bottom: -18px;
+  color: var(--teal);
+  font-weight: 900;
+}
+.num {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--teal);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+.timeline-step h3 {
+  margin: 0 0 4px;
+  font-size: 1.12rem;
+}
+.timeline-step p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.field {
+  display: grid;
+  gap: 7px;
+}
+.field.full { grid-column: 1 / -1; }
+label {
+  font-weight: 800;
+  font-size: .95rem;
+}
+input, textarea, select {
+  width: 100%;
+  border: 1px solid rgba(7,50,68,.18);
+  background: rgba(255,255,255,.88);
+  border-radius: 15px;
+  padding: 13px 14px;
+  font: inherit;
+  color: var(--ink);
+}
+textarea { min-height: 112px; resize: vertical; }
+button, .button {
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 900;
+  cursor: pointer;
+}
+.primary {
+  background: var(--teal);
+  color: white;
+  box-shadow: 0 18px 45px rgba(7,50,68,.18);
+}
+.secondary {
+  background: rgba(255,255,255,.8);
+  border: 1px solid var(--line);
+}
+.cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 26px;
+}
+.small {
+  font-size: .92rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.audio-box {
+  margin: 26px auto 0;
+  max-width: 760px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 26px;
+  text-align: left;
+}
+.audio-placeholder {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 170px;
+  border-radius: 22px;
+  border: 1px dashed rgba(7,50,68,.30);
+  background: var(--soft);
+  color: var(--muted);
+}
+.audio-placeholder strong {
+  color: var(--ink);
+  font-size: 1.25rem;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 12px;
+}
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.check {
+  color: #2c9678;
+  font-weight: 900;
+}
+footer {
+  padding: 40px 0 50px;
+  text-align: center;
+  color: var(--muted);
+}
+footer a { color: var(--teal); }
+@media (max-width: 860px) {
+  .two-col { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  nav { align-items: flex-start; }
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+  <nav>
+    <a href="/" class="logo">try<span>aloha</span>.ai</a>
+    <a href="/" class="nav-link">Back home</a>
+  </nav>
+
+  <main class="hero">
+    <div class="badge">Setup request received</div>
+    <h1>Thanks — we’ll review your business info and follow up <em>soon</em>.</h1>
+    <p class="lede">Next step: we’ll use what you sent to prepare the first version of your AI receptionist and reach out with any questions.</p>
+
+    <section class="card">
+      <div class="timeline" style="max-width: 820px; margin: 0 auto;">
+        <div class="timeline-step">
+          <div class="num">1</div>
+          <div>
+            <h3>We review your setup info</h3>
+            <p>We check your business type, hours, caller questions, and requested call flow.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="num">2</div>
+          <div>
+            <h3>We prepare the test version</h3>
+            <p>No payment info is needed while we build the first test.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="num">3</div>
+          <div>
+            <h3>You approve before launch</h3>
+            <p>Your 7-day trial starts only after your test call is approved and the agent goes live.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">Home</a> · <a href="demo.html">Demo</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p>Built by Tradewind Labs LLC</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<title>Start Free | tryaloha.ai</title>
+
+<style>
+:root {
+  --ink: #073244;
+  --teal: #0b5f78;
+  --orange: #e7663f;
+  --cream: #fbf6ec;
+  --paper: #fffaf2;
+  --muted: #6b6f76;
+  --line: rgba(7,50,68,.14);
+  --soft: rgba(11,95,120,.07);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(231,102,63,.12), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(11,95,120,.10), transparent 30%),
+    var(--cream);
+}
+a { color: inherit; }
+.container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  gap: 18px;
+}
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.04em;
+}
+.logo span { color: var(--orange); }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal);
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 16px 40px rgba(7,50,68,.16);
+}
+.hero {
+  padding: 42px 0 28px;
+  text-align: center;
+}
+.badge {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.62);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  color: var(--teal);
+}
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: .95;
+  letter-spacing: -0.055em;
+  margin: 22px auto 18px;
+  max-width: 900px;
+}
+h1 em { color: var(--orange); font-style: normal; }
+.lede {
+  font-size: clamp(1.08rem, 2vw, 1.35rem);
+  color: var(--muted);
+  max-width: 790px;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+}
+.card {
+  background: rgba(255,250,242,.86);
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  padding: clamp(24px, 4vw, 46px);
+  box-shadow: 0 24px 70px rgba(7,50,68,.10);
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: start;
+}
+.panel {
+  background: rgba(255,255,255,.74);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 24px;
+}
+.panel.accent {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(231,102,63,.20), transparent 30%),
+    linear-gradient(135deg, #062b3a, #0b5f78);
+  color: white;
+  border-color: rgba(255,255,255,.18);
+  box-shadow: 0 28px 80px rgba(7,50,68,.22);
+}
+.panel.accent h2 {
+  color: white;
+}
+.panel.accent .timeline-step {
+  background: rgba(255,255,255,.96);
+  border-color: rgba(255,255,255,.42);
+  color: var(--ink);
+  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+}
+.panel.accent .timeline-step h3 {
+  color: var(--ink);
+}
+.panel.accent .timeline-step p {
+  color: var(--muted);
+}
+.panel.accent .checklist li {
+  color: rgba(255,255,255,.88);
+}
+.panel.accent .checklist {
+  margin-top: 22px;
+}
+.panel.accent .check {
+  color: #8be0c6;
+}
+.panel.accent .timeline-step {
+  display: block;
+  position: relative;
+  padding: 18px 72px;
+  min-height: 106px;
+}
+.panel.accent .timeline-step .num {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.panel.accent .timeline-step h3,
+.panel.accent .timeline-step p {
+  text-align: center;
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+.note {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+.timeline {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+.timeline-step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.68);
+  border-radius: 20px;
+  position: relative;
+}
+.timeline-step:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  left: 28px;
+  bottom: -18px;
+  color: var(--teal);
+  font-weight: 900;
+}
+.num {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--teal);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+.timeline-step h3 {
+  margin: 0 0 4px;
+  font-size: 1.12rem;
+}
+.timeline-step p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.field {
+  display: grid;
+  gap: 7px;
+}
+.field.full { grid-column: 1 / -1; }
+label {
+  font-weight: 800;
+  font-size: .95rem;
+}
+input, textarea, select {
+  width: 100%;
+  border: 1px solid rgba(7,50,68,.18);
+  background: rgba(255,255,255,.88);
+  border-radius: 15px;
+  padding: 13px 14px;
+  font: inherit;
+  color: var(--ink);
+}
+textarea { min-height: 112px; resize: vertical; }
+button, .button {
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 900;
+  cursor: pointer;
+}
+.primary {
+  background: var(--teal);
+  color: white;
+  box-shadow: 0 18px 45px rgba(7,50,68,.18);
+}
+.secondary {
+  background: rgba(255,255,255,.8);
+  border: 1px solid var(--line);
+}
+.cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 26px;
+}
+.small {
+  font-size: .92rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.audio-box {
+  margin: 26px auto 0;
+  max-width: 760px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 26px;
+  text-align: left;
+}
+.audio-placeholder {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 170px;
+  border-radius: 22px;
+  border: 1px dashed rgba(7,50,68,.30);
+  background: var(--soft);
+  color: var(--muted);
+}
+.audio-placeholder strong {
+  color: var(--ink);
+  font-size: 1.25rem;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 12px;
+}
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.check {
+  color: #2c9678;
+  font-weight: 900;
+}
+footer {
+  padding: 40px 0 50px;
+  text-align: center;
+  color: var(--muted);
+}
+footer a { color: var(--teal); }
+@media (max-width: 860px) {
+  .two-col { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  nav { align-items: flex-start; }
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+  <nav>
+    <a href="/" class="logo">try<span>aloha</span>.ai</a>
+    <a href="demo.html" class="nav-link">Hear demo</a>
+  </nav>
+
+  <main class="hero">
+    <div class="badge">No card required · Free setup first</div>
+    <h1>Tell us about your business. We’ll build the AI receptionist <em>for you</em>.</h1>
+    <p class="lede">No tech setup. No payment info to start. Send the basics and we’ll prepare a private test call so you can hear exactly how your AI receptionist will answer.</p>
+
+    <section class="card">
+      <div class="two-col">
+        <div class="panel">
+          <h2>Start your free setup</h2>
+          <p class="note">This gives us enough to build your first test version. We’ll follow up if we need details.</p>
+
+          <form name="tryaloha-start" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+            <input type="hidden" name="form-name" value="tryaloha-start">
+            <p style="display:none">
+              <label>Don’t fill this out: <input name="bot-field"></label>
+            </p>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="business-name">Business name</label>
+                <input id="business-name" name="business-name" required>
+              </div>
+
+              <div class="field">
+                <label for="your-name">Your name</label>
+                <input id="your-name" name="your-name" required>
+              </div>
+
+              <div class="field">
+                <label for="email">Best email</label>
+                <input id="email" name="email" type="email" required>
+              </div>
+
+              <div class="field">
+                <label for="phone">Best phone</label>
+                <input id="phone" name="phone" type="tel">
+              </div>
+
+              <div class="field">
+                <label for="business-type">Business type</label>
+                <select id="business-type" name="business-type">
+                  <option value="">Choose one</option>
+                  <option>Restaurant / food service</option>
+                  <option>Salon / spa / wellness</option>
+                  <option>Contractor / home service</option>
+                  <option>Medical / dental / clinic</option>
+                  <option>Retail / local shop</option>
+                  <option>Tour / activity / hospitality</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="website">Website or Instagram</label>
+                <input id="website" name="website" placeholder="https://... or @business">
+              </div>
+
+              <div class="field full">
+                <label for="hours">Business hours</label>
+                <textarea id="hours" name="hours" placeholder="Example: Mon–Fri 9–5, Sat 10–2, closed Sunday"></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="help-with">What should the AI receptionist help with?</label>
+                <textarea id="help-with" name="help-with" placeholder="Example: answer pricing questions, book appointments, take messages, send SMS confirmations"></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="common-questions">Top 3 common caller questions</label>
+                <textarea id="common-questions" name="common-questions" placeholder="Example: Are you open today? Do you take walk-ins? How much does it cost?"></textarea>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <button class="primary" type="submit">Send my setup info</button>
+            </div>
+
+            <p class="small">No card required. Your 7-day trial starts only after you approve the private test call and your AI receptionist goes live. Cancel anytime during your trial before your first bill.</p>
+          </form>
+        </div>
+
+        <div class="panel accent">
+          <h2>What happens next</h2>
+          <div class="timeline">
+            <div class="timeline-step">
+              <div class="num">1</div>
+              <div>
+                <h3>You send the basics</h3>
+                <p>Business info, hours, common questions, and what callers need help with.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="num">2</div>
+              <div>
+                <h3>We build the backend</h3>
+                <p>We prepare the AI receptionist, call flow, SMS behavior, and transcript setup.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="num">3</div>
+              <div>
+                <h3>You test it privately</h3>
+                <p>You’ll get a private test number or test call before anything goes live.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="num">4</div>
+              <div>
+                <h3>Approve it and go live</h3>
+                <p>After approval, we confirm billing, activate the dedicated 808 number, and start your 7-day trial.</p>
+              </div>
+            </div>
+          </div>
+
+          <ul class="checklist">
+            <li><span class="check">✓</span><span>No setup fee.</span></li>
+            <li><span class="check">✓</span><span>No card required to start.</span></li>
+            <li><span class="check">✓</span><span>Approve the test call before going live.</span></li>
+            <li><span class="check">✓</span><span>7-day trial before your first bill.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">Home</a> · <a href="demo.html">Demo</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+    <p>Built by Tradewind Labs LLC</p>
+  </footer>
+</div>
+</body>
+</html>
