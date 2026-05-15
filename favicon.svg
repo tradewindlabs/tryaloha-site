@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#073746"/>
+  <text x="16" y="22" text-anchor="middle"
+        font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800" font-size="18" letter-spacing="-1">
+    <tspan fill="#FBF6EC">t</tspan><tspan fill="#7EC8D9">a</tspan>
+  </text>
+</svg>
